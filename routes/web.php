@@ -1,15 +1,45 @@
 <?php
 
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+
+
+
+Route::get('/register', [UserController::class, 'registration'])->name('register.form');
+Route::post('/register', [UserController::class, 'UserRegister'])->name('user.register');
+Route::get('/login', [UserController::class, 'login'])->name('login.form');
+Route::post('/login', [UserController::class, 'UserLogin'])->name('user.login');
+Route::get('/home', [AuthController::class, 'home'])->name('home.page');
+
+
+
+Route::middleware(['auth', 'role:admin'])->group(function() {
+    Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('pages.backend.dashboard');
-});
 
 Route::get('/admin-order', function () {
     return view('pages.backend.order');
@@ -47,9 +77,9 @@ Route::get('/category', function () {
     return view('pages.backend.category');
 });
 
-Route::get('/login', function () {
-    return view('pages.backend.login');
-});
+// Route::get('/login', function () {
+//     return view('pages.backend.login');
+// });
 
 Route::get('/customer', function () {
     return view('pages.backend.customer');
@@ -112,9 +142,6 @@ Route::get('/subcategory', function () {
 
 //Forntend view routeing
 
-Route::get('/home', function () {
-    return view('pages.forntend.home');
-});
 
 Route::get('/about', function () {
     return view('pages.forntend.about');
@@ -150,14 +177,6 @@ Route::get('/order', function () {
 
 Route::get('/order-details', function () {
     return view('pages.forntend.orderdetails');
-});
-
-Route::get('/login', function () {
-    return view('pages.forntend.login');
-});
-
-Route::get('/register', function () {
-    return view('pages.forntend.register');
 });
 
 Route::get('/profile', function () {

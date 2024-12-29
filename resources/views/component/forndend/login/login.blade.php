@@ -9,15 +9,17 @@
                     <h5>Welcome Back</h5>
                     <p>Enter the information while you are registering</p>
                 </div>
-                <form action="userdashboard.html">
+                <form action="{{ route('user.login') }}" method="POST">
+                    @csrf
+
                     <div class="form-group position-relative mb-3">
                         <label for="" class="form-label">Phone Number</label>
-                        <input type="number" class="form-control" id="phn_num" placeholder="Phone Number">
+                        <input type="string" class="form-control" id="phone" name="phone" placeholder="Phone Number">
                         <img src="assets/images/icon/form_cell.svg" alt="" class="w-auto h-auto form-icon">
                     </div>
                     <div class="form-group position-relative mb-3">
                         <label for="" class="form-label">Password</label>
-                        <input type="password" class="form-control" id="pass" placeholder="Password">
+                        <input type="password" class="form-control" id="pass" name="password" placeholder="Password">
                         <img src="assets/images/icon/form_lock.svg" alt="" class="w-auto h-auto form-icon">
                     </div>
                     <div class="form-group  mb-3">
@@ -33,7 +35,7 @@
                 </form>
                 <div class="d-flex mt-4 flex-column align-items-center justify-content-center gap-2">
                     <a href="forgetpassword.html" class="font-16 fw-500 text-primary">Forgot password?</a>
-                    <p class="font-16 fw-500 text-black">New Customer? <a href="register.html"
+                    <p class="font-16 fw-500 text-black">New Customer? <a href="{{ route('register.form') }}"
                                                                           class=" text-primary">Register
                         </a>Here</p>
                 </div>
